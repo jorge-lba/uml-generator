@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import inquirer from 'inquirer'
 import fs from 'fs'
 import path from 'path'
@@ -118,12 +120,12 @@ const createHTML = async (path: string, umlObject:UMLObject) => {
 
 }
 
-const PATH = path.join(__dirname, 'uml')
+const PATH = path.join(__dirname,'..', 'uml')
 
 const ensureDirectoryExistence = (filePath:string) =>  fs.existsSync(filePath) || fs.mkdirSync(filePath)
 
 const saveUML = (PATH:string) => async (content:string, name:string, extension:string) => {
-  PATH += `/${name}`
+  // PATH += `/${name}`
   ensureDirectoryExistence(PATH)
   return await fs.writeFileSync(PATH + `/${name}.${extension}` , content )
 }
@@ -162,7 +164,7 @@ const main = async () => {
   const umlJson = JSON.stringify(objectUML)
   await saveUML(PATH)(umlJson, objectUML.name, 'json')
 
-  const html = await createHTML(path.join(__dirname, 'index.html'), objectUML)
+  const html = await createHTML(path.join(__dirname,'..', 'index.html'), objectUML)
   await saveUML(PATH)(html, objectUML.name, 'html')
 
 }
