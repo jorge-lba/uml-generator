@@ -78,7 +78,7 @@ const createHTML = async (path, umlObject) => {
     });
     return $.html('.uml');
 };
-const PATH = path_1.default.join(__dirname, 'uml');
+const PATH = path_1.default.join(__dirname, '..', '..', 'uml');
 const ensureDirectoryExistence = (filePath) => fs_1.default.existsSync(filePath) || fs_1.default.mkdirSync(filePath);
 const saveUML = (PATH) => async (content, name, extension) => {
     // PATH += `/${name}`

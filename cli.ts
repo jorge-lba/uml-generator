@@ -120,7 +120,7 @@ const createHTML = async (path: string, umlObject:UMLObject) => {
 
 }
 
-const PATH = path.join(__dirname, 'uml')
+const PATH = path.join(__dirname,'..', '..', 'uml')
 
 const ensureDirectoryExistence = (filePath:string) =>  fs.existsSync(filePath) || fs.mkdirSync(filePath)
 
