@@ -120,7 +120,7 @@ const createHTML = async (path: string, umlObject:UMLObject) => {
 
 }
 
-const PATH = path.join(__dirname,'..', 'uml')
+const PATH = path.join(__dirname, 'uml')
 
 const ensureDirectoryExistence = (filePath:string) =>  fs.existsSync(filePath) || fs.mkdirSync(filePath)
 
@@ -164,7 +164,7 @@ const main = async () => {
   const umlJson = JSON.stringify(objectUML)
   await saveUML(PATH)(umlJson, objectUML.name, 'json')
 
-  const html = await createHTML(path.join(__dirname,'..', 'index.html'), objectUML)
+  const html = await createHTML(path.join(__dirname, 'index.html'), objectUML)
   await saveUML(PATH)(html, objectUML.name, 'html')
 
 }
