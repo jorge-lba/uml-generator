@@ -14,11 +14,11 @@
     "ts-node-dev": "^1.1.1"
   },
   "bin": {
-    "uml-generator": "./cli.js"
+    "generator-uml": "cli.js"
   },
   "name": "generator-uml",
   "description": "Test generate UML",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "cli.ts",
   "keywords": [],
   "author": "",
