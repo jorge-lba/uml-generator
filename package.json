@@ -18,7 +18,7 @@
   },
   "name": "generator-uml",
   "description": "Test generate UML",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "src/cli.ts",
   "keywords": [],
   "author": "",
