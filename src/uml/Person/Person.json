@@ -1,0 +1,1 @@
+{"type":"class","name":"Person","attributes":["name","id","historic","bettingChips"],"methods":["get name","get id","get historic","get bettingChips","set name","set historic","set bettingChips",""]}
