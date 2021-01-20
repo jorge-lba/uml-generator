@@ -5,37 +5,14 @@ import fs from 'fs'
 import path from 'path'
 import cheerio from 'cheerio'
 
+import {
+  QuestionPrompt,
+  UMLObject,
+  PromptResponse,
+  GenericObject
+} from './@types/index'
+
 const prompt = inquirer.prompt
-
-type ChoiceOption = {
-  key: string,
-  value: string
-}
-
-type QuestionPrompt = {
-  name:string,
-  message:string,
-  type?:string,
-  choices?: string[] | ChoiceOption[]
-}
-
-type UMLObject = {
-  type:string,
-  name:string,
-  attributes:string[],
-  methods:string[]
-}
-
-type PromptResponse = {
-  type:string,
-  name:string,
-  attributes:string,
-  getters:string[],
-  setters:string[],
-  methods:string
-}
-
-type GenericObject<T> = { [key:string]:T }
 
 const questions: GenericObject<QuestionPrompt> = {
   initial: {
@@ -120,7 +97,8 @@ const createHTML = async (path: string, umlObject:UMLObject) => {
 
 }
 
-const PATH = path.join(__dirname,'..', '..', 'uml')
+const HTML_BASE = path.join(__dirname, '..', 'index.html')
+const SAVE_PATH = path.join(process.cwd(), 'uml')
 
 const ensureDirectoryExistence = (filePath:string) =>  fs.existsSync(filePath) || fs.mkdirSync(filePath)
 
@@ -151,6 +129,7 @@ const executionFlow = {
 }
 
 const main = async () => {
+
   const option = await prompt<{startOption:'A new UML'|'Use a JSON file'}>([questions.initial])
   const response = await executionFlow[option.startOption]()
 
@@ -162,11 +141,11 @@ const main = async () => {
   const objectUML = createObjectUML(response)
 
   const umlJson = JSON.stringify(objectUML)
-  await saveUML(PATH)(umlJson, objectUML.name, 'json')
+  await saveUML(SAVE_PATH)(umlJson, objectUML.name, 'json')
 
-  const html = await createHTML(path.join(__dirname, 'index.html'), objectUML)
-  await saveUML(PATH)(html, objectUML.name, 'html')
+  const html = await createHTML(HTML_BASE, objectUML)
+  await saveUML(SAVE_PATH)(html, objectUML.name, 'html')
 
 }
 
-main()
+export default main
