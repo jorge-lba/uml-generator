@@ -77,14 +77,17 @@ const createObjectUML = (responsePrompt) => {
 const createHTML = (path, umlObject) => __awaiter(void 0, void 0, void 0, function* () {
     const html = yield fs_1.default.readFileSync(path, 'utf8');
     const $ = cheerio_1.default.load(html);
-    $('.header').append(`<span style=" font-weight: lighter; color: #aaa">${umlObject.type}</span><br/>`);
-    $('.header').append(`<span style=" font-size: 24px; color: #666">${umlObject.name}</span><br/>`);
-    umlObject.attributes.forEach(attribute => $('.attributes').append(`<span>${attribute}</span><br/>`));
+    $('.header').append(`<span style=" font-weight: lighter; color: #aaa">${umlObject.type}</span><br>`);
+    $('.header').append(`<span style=" font-size: 24px; color: #666">${umlObject.name}</span><br>`);
+    umlObject.attributes.forEach(attribute => $('.attributes').append(`<span>${attribute}</span><br>`));
     umlObject.methods.forEach(method => {
         method += '( )';
-        $('.methods').append(`<span>${method}</span><br/>`);
+        $('.methods').append(`<span>${method}</span><br>`);
     });
-    return $.html('.svg');
+    const spans = $('span').length - 4;
+    const heightBase = Number($('svg').attr('height')) + (spans * 41);
+    $('svg').attr('height', `${heightBase}`);
+    return $.html('.svg').replace(/<br>/g, '<br/>');
 });
 const HTML_BASE = path_1.default.join(__dirname, '..', 'index.html');
 const SAVE_PATH = path_1.default.join(process.cwd(), 'uml');
@@ -119,6 +122,6 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const umlJson = JSON.stringify(objectUML);
     yield saveUML(SAVE_PATH)(umlJson, objectUML.name, 'json');
     const html = yield createHTML(HTML_BASE, objectUML);
-    yield saveUML(SAVE_PATH)(html, objectUML.name, 'html');
+    yield saveUML(SAVE_PATH)(html, objectUML.name, 'svg');
 });
 exports.default = main;
