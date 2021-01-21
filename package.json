@@ -20,7 +20,7 @@
   "name": "uml-generator",
   "description": "Test generate UML",
   "version": "0.1.0",
-  "main": "cli.js",
+  "main": "./build/cli.js",
   "keywords": [],
   "author": "",
   "license": "ISC"
