@@ -91,7 +91,12 @@ const createHTML = async (path: string, umlObject:UMLObject) => {
     $('.methods').append(`<span>${method}</span><br>`)
   })
 
-  return $.html('.uml')
+  const spans = $('span').length - 4
+  const heightBase = Number($('svg').attr('height')) + (spans*41)
+
+  $('svg').attr('height', `${heightBase}`)
+
+  return $.html('.svg').replace(/<br>/g, '<br/>')
 
 }
 
@@ -142,7 +147,7 @@ const main = async () => {
   await saveUML(SAVE_PATH)(umlJson, objectUML.name, 'json')
 
   const html = await createHTML(HTML_BASE, objectUML)
-  await saveUML(SAVE_PATH)(html, objectUML.name, 'html')
+  await saveUML(SAVE_PATH)(html, objectUML.name, 'svg')
 
 }
 

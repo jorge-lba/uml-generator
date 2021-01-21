@@ -1,0 +1,1 @@
+{"type":"class","name":"Person","attributes":["name","age"],"methods":["get name","get age","set name","set age","speak"]}
