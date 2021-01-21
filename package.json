@@ -19,7 +19,7 @@
   },
   "name": "uml-generator",
   "description": "Test generate UML",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "./build/cli.js",
   "keywords": [],
   "author": "",

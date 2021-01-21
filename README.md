@@ -86,7 +86,7 @@ An uml folder must be created in your project, with an SVG file and a Json file.
   </foreignObject>
 </svg>
 ```
-![](./uml/Person.svg)
+![](https://user-images.githubusercontent.com/56704254/105276628-95142900-5b80-11eb-90ee-056ffc58a608.png)
 
 To use SVG in your markdown document, add the svg file as follows:
 
